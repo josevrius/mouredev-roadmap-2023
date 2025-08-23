@@ -12,18 +12,18 @@ public final class App {
             ================""";
 
     public static void main(String[] args) {
-        Player[] sequenceScore = {Player.P2, Player.P2, Player.P1, Player.P1, Player.P2, Player.P1, null, Player.P2, Player.P2};
+        Player[] sequence = {Player.P2, Player.P2, Player.P1, Player.P1, Player.P2, Player.P1, null, Player.P2, Player.P2};
 
         try {
             System.out.println(HEADER);
-            showGame(sequenceScore);
+            showGame(sequence);
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
     }
 
-    private static void showGame(Player[] sequenceScore) {
-        if (sequenceScore == null || sequenceScore.length == 0) {
+    private static void showGame(Player[] sequence) {
+        if (sequence == null || sequence.length == 0) {
             throw new NullPointerException("La secuencia de puntos no es válida");
         }
 
@@ -33,11 +33,11 @@ public final class App {
         int i = 0;
 
         do {
-            if (sequenceScore[i] != null) {
-                switch (sequenceScore[i]) {
+            if (sequence[i] != null) {
+                switch (sequence[i]) {
                     case P1 -> p1Score++;
                     case P2 -> p2Score++;
-                    default -> throw new IllegalArgumentException("Jugador no permitido");
+                    default -> throw new IllegalArgumentException("Jugador no permitido (" + sequence[i] + ")");
                 }
                 if (p1Score >= 3 && p1Score == p2Score) {
                     System.out.println("Deuce");
@@ -56,7 +56,7 @@ public final class App {
                 }
             }
             i++;
-            if (!endGame && i == sequenceScore.length) {
+            if (!endGame && i == sequence.length) {
                 System.out.println("El juego termina sin ganador");
                 endGame = true;
             }
