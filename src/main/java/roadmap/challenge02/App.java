@@ -42,14 +42,14 @@ public final class App {
                 if (p1Score >= 3 && p1Score == p2Score) {
                     System.out.println("Deuce");
                 } else if (p1Score > 3 && p1Score == p2Score + 1) {
-                    System.out.println("Ventaja P1");
+                    System.out.println("Ventaja de P1");
                 } else if (p2Score > 3 && p2Score == p1Score + 1) {
-                    System.out.println("Ventaja P2");
+                    System.out.println("Ventaja de P2");
                 } else if (p1Score > 3 && p1Score >= p2Score + 2) {
-                    System.out.println("Ha ganado P1");
+                    System.out.println("P1 gana el juego");
                     endGame = true;
                 } else if (p2Score > 3 && p2Score >= p1Score + 2) {
-                    System.out.println("Ha ganado P2");
+                    System.out.println("P2 gana el juego");
                     endGame = true;
                 } else {
                     System.out.println(EARLY_SCORES[p1Score] + " - " + EARLY_SCORES[p2Score]);

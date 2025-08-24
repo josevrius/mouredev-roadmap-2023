@@ -10,8 +10,7 @@ public final class App {
     private static final Scanner SCN = new Scanner(System.in);
     private static final SecureRandom RND = new SecureRandom();
 
-    private static final int MIN_LENGTH = 8;
-    private static final int MAX_LENGTH = 16;
+    // Pools
     private static final String LETTERS = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
     private static final String NUMBERS = "0123456789";
     private static final String SYMBOLS = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
@@ -24,11 +23,11 @@ public final class App {
     public static void main(String[] args) {
         try {
             System.out.println(HEADER);
-            int length = enterLength();
-            boolean upp = enterCategory("Mayúsculas : ");
-            boolean low = enterCategory("Minúsculas : ");
-            boolean num = enterCategory("Números ...: ");
-            boolean sym = enterCategory("Símbolos ..: ");
+            int length = enterLength("Longitud ..: ");
+            boolean upp = selectPool("Mayúsculas : ");
+            boolean low = selectPool("Minúsculas : ");
+            boolean num = selectPool("Números ...: ");
+            boolean sym = selectPool("Símbolos ..: ");
             String password = generatePassword(length, upp, low, num, sym);
             System.out.println("Contraseña : " + password);
         } catch (Exception e) {
@@ -36,17 +35,17 @@ public final class App {
         }
     }
 
-    private static int enterLength() {
-        System.out.print("Longitud ..: ");
+    private static int enterLength(String msg) {
+        System.out.print(msg);
         String input = SCN.nextLine().strip();
 
         if (!input.matches("[8-9]|1[0-6]")) {
-            throw new IllegalArgumentException("La longitud debe estar entre " + MIN_LENGTH + " y " + MAX_LENGTH);
+            throw new IllegalArgumentException("La longitud debe estar entre 8 y 16");
         }
         return Integer.parseInt(input);
     }
 
-    private static boolean enterCategory(String msg) {
+    private static boolean selectPool(String msg) {
         System.out.print(msg);
         String input = SCN.nextLine().strip().toUpperCase();
 
@@ -62,26 +61,26 @@ public final class App {
         }
 
         StringBuilder password = new StringBuilder();
-        List<String> selectedCategories = new ArrayList<>();
+        List<String> selectedPools = new ArrayList<>();
 
         if (uppercase) {
             password.append(getRandomChar(LETTERS));
-            selectedCategories.add(LETTERS);
+            selectedPools.add(LETTERS);
         }
         if (lowercase) {
             password.append(getRandomChar(LETTERS.toLowerCase()));
-            selectedCategories.add(LETTERS.toLowerCase());
+            selectedPools.add(LETTERS.toLowerCase());
         }
         if (number) {
             password.append(getRandomChar(NUMBERS));
-            selectedCategories.add(NUMBERS);
+            selectedPools.add(NUMBERS);
         }
         if (symbol) {
             password.append(getRandomChar(SYMBOLS));
-            selectedCategories.add(SYMBOLS);
+            selectedPools.add(SYMBOLS);
         }
-        for (int i = selectedCategories.size() + 1; i <= length; i++) {
-            String category = selectedCategories.get(RND.nextInt(selectedCategories.size()));
+        for (int i = selectedPools.size() + 1; i <= length; i++) {
+            String category = selectedPools.get(RND.nextInt(selectedPools.size()));
             password.append(getRandomChar(category));
         }
         shuffle(password);

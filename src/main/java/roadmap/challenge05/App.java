@@ -6,20 +6,31 @@ import java.util.List;
 public final class App {
 
     private enum Sign {
-        PIEDRA("🪨"), PAPEL("📄"), TIJERA("✂️"), LAGARTO("🦎"), SPOCK("🖖");
+        ROCK("🪨"), PAPER("📄"), SCISSOR("✂️"), LIZARD("🦎"), SPOCK("🖖");
 
-        private final String label;
+        private final String icon;
 
-        Sign(String label) {
-            this.label = label;
+        Sign(String icon) {
+            this.icon = icon;
         }
 
-        public String getLabel() {
-            return label;
+        public String getIcon() {
+            return icon;
+        }
+
+        public boolean winsTo(Sign sign) {
+            return this == ROCK && (sign == SCISSOR || sign == LIZARD)
+                    || this == PAPER && (sign == ROCK || sign == SPOCK)
+                    || this == SCISSOR && (sign == PAPER || sign == LIZARD)
+                    || this == LIZARD && (sign == SPOCK || sign == PAPER)
+                    || this == SPOCK && (sign == SCISSOR || sign == ROCK);
         }
     }
 
     private record Round(Sign player1, Sign player2) {
+    }
+
+    private record Scores(int player1, int player2) {
     }
 
     private static final String HEADER = """
@@ -30,51 +41,49 @@ public final class App {
     public static void main(String[] args) {
         System.out.println(HEADER);
         List<Round> rounds = setRounds();
-        playGame(rounds);
+        Scores scores = playGame(rounds);
+        showResult(scores);
     }
 
     private static List<Round> setRounds() {
         List<Round> rounds = new ArrayList<>();
-        rounds.add(new Round(Sign.PIEDRA, Sign.PIEDRA));
-        rounds.add(new Round(Sign.TIJERA, Sign.PAPEL));
-        rounds.add(new Round(Sign.PAPEL, Sign.TIJERA));
-        rounds.add(new Round(Sign.LAGARTO, Sign.LAGARTO));
-        rounds.add(new Round(Sign.LAGARTO, Sign.TIJERA));
+        rounds.add(new Round(Sign.ROCK, Sign.ROCK));
+        rounds.add(new Round(Sign.SPOCK, Sign.ROCK));
+        rounds.add(new Round(Sign.PAPER, Sign.SCISSOR));
+        rounds.add(new Round(Sign.LIZARD, Sign.LIZARD));
+        rounds.add(new Round(Sign.LIZARD, Sign.SCISSOR));
 
         return rounds;
     }
 
-    private static void playGame(List<Round> rounds) {
+    private static Scores playGame(List<Round> rounds) {
         int p1Score = 0;
         int p2Score = 0;
 
         for (int i = 0; i < rounds.size(); i++) {
             Round round = rounds.get(i);
-            System.out.printf("Ronda %d : %s vs %s%n", i + 1, round.player1.getLabel(), round.player2.getLabel());
+            System.out.printf("Ronda %d : %s vs %s%n", i + 1, round.player1.getIcon(), round.player2.getIcon());
             if (round.player1 != round.player2) {
-                if (winsPlayer1(round.player1, round.player2)) {
+                if (round.player1.winsTo(round.player2)) {
                     p1Score++;
                 } else {
                     p2Score++;
                 }
             }
         }
-        if (p1Score > p2Score) {
-            System.out.println("Gana ...: Jugador 1");
-        } else if (p1Score < p2Score) {
-            System.out.println("Gana ...: Jugador 2");
-        } else {
-            System.out.println("Gana ...: Empate");
-        }
+        return new Scores(p1Score, p2Score);
     }
 
-    private static boolean winsPlayer1(Sign player1, Sign player2) {
-        return switch (player1) {
-            case PIEDRA -> player2 == Sign.TIJERA || player2 == Sign.LAGARTO;
-            case PAPEL -> player2 == Sign.PIEDRA || player2 == Sign.SPOCK;
-            case TIJERA -> player2 == Sign.PAPEL || player2 == Sign.LAGARTO;
-            case LAGARTO -> player2 == Sign.SPOCK || player2 == Sign.PAPEL;
-            case SPOCK -> player2 == Sign.TIJERA || player2 == Sign.PIEDRA;
-        };
+    private static void showResult(Scores score) {
+        String result;
+
+        if (score.player1 > score.player2) {
+            result = "Jugador 1";
+        } else if (score.player1 < score.player2) {
+            result = "Jugador 2";
+        } else {
+            result = "Empate";
+        }
+        System.out.println("Ganador : " + result);
     }
 }
