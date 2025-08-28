@@ -97,17 +97,6 @@ public final class App {
         }
     }
 
-    private static Map<String, House[]> setQuiz() {
-        LinkedHashMap<String, House[]> quiz = new LinkedHashMap<>();
-        quiz.put(QUESTION_1, new House[]{House.GRYFFINDOR, House.HUFFLEPUFF, House.RAVENCLAW, House.SLYTHERIN});
-        quiz.put(QUESTION_2, new House[]{House.GRYFFINDOR, House.RAVENCLAW, House.SLYTHERIN, House.HUFFLEPUFF});
-        quiz.put(QUESTION_3, new House[]{House.HUFFLEPUFF, House.RAVENCLAW, House.SLYTHERIN, House.GRYFFINDOR});
-        quiz.put(QUESTION_4, new House[]{House.GRYFFINDOR, House.RAVENCLAW, House.SLYTHERIN, House.HUFFLEPUFF});
-        quiz.put(QUESTION_5, new House[]{House.RAVENCLAW, House.GRYFFINDOR, House.HUFFLEPUFF, House.SLYTHERIN});
-
-        return Collections.unmodifiableMap(quiz);
-    }
-
     private static String enterOption(String question) {
         String input;
         boolean isValid = false;
@@ -145,6 +134,17 @@ public final class App {
             House house = affinityHouses.get(RND.nextInt(affinityHouses.size()));
             System.out.println("Una decisión difícil, " + house + "!");
         }
+    }
+
+    private static Map<String, House[]> setQuiz() {
+        LinkedHashMap<String, House[]> quiz = new LinkedHashMap<>();
+        quiz.put(QUESTION_1, new House[]{House.GRYFFINDOR, House.HUFFLEPUFF, House.RAVENCLAW, House.SLYTHERIN});
+        quiz.put(QUESTION_2, new House[]{House.GRYFFINDOR, House.RAVENCLAW, House.SLYTHERIN, House.HUFFLEPUFF});
+        quiz.put(QUESTION_3, new House[]{House.HUFFLEPUFF, House.RAVENCLAW, House.SLYTHERIN, House.GRYFFINDOR});
+        quiz.put(QUESTION_4, new House[]{House.GRYFFINDOR, House.RAVENCLAW, House.SLYTHERIN, House.HUFFLEPUFF});
+        quiz.put(QUESTION_5, new House[]{House.RAVENCLAW, House.GRYFFINDOR, House.HUFFLEPUFF, House.SLYTHERIN});
+
+        return Collections.unmodifiableMap(quiz);
     }
 
     private static void pauseApp(String msg) {
