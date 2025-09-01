@@ -19,7 +19,7 @@ public final class App {
     private static int percentToHide = 60;
 
     public static void main(String[] args) {
-        List<Integer> hiddenChars = getIndexes();
+        Set<Integer> hiddenChars = getIndexes();
 
         int attempt = 1;
         boolean guessOK;
@@ -43,17 +43,17 @@ public final class App {
         }
     }
 
-    private static List<Integer> getIndexes() {
+    private static Set<Integer> getIndexes() {
         if (percentToHide < 0) percentToHide = 0;
         else if (percentToHide > 60) percentToHide = 60;
 
         List<Integer> hiddenChars = new ArrayList<>(IntStream.rangeClosed(0, WORD.length() - 1).boxed().toList());
         Collections.shuffle(hiddenChars);
 
-        return new ArrayList<>(hiddenChars.subList(0, WORD.length() * percentToHide / 100).stream().sorted().toList());
+        return new HashSet<>(hiddenChars.subList(0, WORD.length() * percentToHide / 100).stream().toList());
     }
 
-    private static void showWord(List<Integer> hiddenChars) {
+    private static void showWord(Set<Integer> hiddenChars) {
         System.out.print("Palabra ..: ");
 
         for (int i = 0; i < WORD.length(); i++) {
@@ -63,7 +63,7 @@ public final class App {
         System.out.println();
     }
 
-    private static boolean guessWord(List<Integer> hiddenChars, int attempt) {
+    private static boolean guessWord(Set<Integer> hiddenChars, int attempt) {
         System.out.printf("Intento %d : ", attempt);
         String input = SCN.nextLine().strip();
 
@@ -72,7 +72,7 @@ public final class App {
         } else {
             for (int i = 0; i < WORD.length(); i++) {
                 if (input.equalsIgnoreCase(String.valueOf(WORD.charAt(i)))) {
-                    hiddenChars.remove(Integer.valueOf(i));
+                    hiddenChars.remove(i);
                 }
             }
         }
