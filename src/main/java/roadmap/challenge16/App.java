@@ -3,6 +3,7 @@ package roadmap.challenge16;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public final class App {
 
@@ -16,10 +17,9 @@ public final class App {
             System.out.println(HEADER);
             Document doc = Jsoup.connect("https://holamundo.day").get();
             Element section = doc.selectFirst("h2:containsOwn(Agenda)").parent().parent();
-            for (Element event : section) {
-                if (event.className().equals("rt-Text rt-r-size-4")) {
-                    System.out.println(event.text());
-                }
+            Elements events = section.getElementsByClass("rt-Text rt-r-size-4");
+            for (Element event : events) {
+                System.out.println(event.text());
             }
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
