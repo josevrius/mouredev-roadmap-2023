@@ -4,7 +4,7 @@ import java.text.Normalizer;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public final class App {
+public final class App1 {
 
     private static final Map<Character, String> LEET_ALPHABET = Map.ofEntries(
             Map.entry('A', "4"), Map.entry('B', "I3"), Map.entry('C', "["),

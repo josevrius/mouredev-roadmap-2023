@@ -3,7 +3,7 @@ package roadmap.challenge05;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class App {
+public final class App5 {
 
     private enum Sign {
         ROCK("🪨"), PAPER("📄"), SCISSOR("✂️"), LIZARD("🦎"), SPOCK("🖖");

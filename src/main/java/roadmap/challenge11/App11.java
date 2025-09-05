@@ -1,11 +1,12 @@
 package roadmap.challenge11;
 
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public final class App {
+public final class App11 {
 
     private static final Scanner SCN = new Scanner(System.in);
 
@@ -37,7 +38,7 @@ public final class App {
         return Integer.parseInt(input);
     }
 
-    private static boolean checkFriday13(int year, int month) {
+    public static boolean checkFriday13(int year, int month) throws DateTimeException {
         LocalDate date = LocalDate.of(year, month, 13);
         return date.getDayOfWeek() == DayOfWeek.FRIDAY;
     }

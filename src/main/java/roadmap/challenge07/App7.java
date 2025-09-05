@@ -1,6 +1,6 @@
 package roadmap.challenge07;
 
-public final class App {
+public final class App7 {
 
     private static final String HEADER = """
             

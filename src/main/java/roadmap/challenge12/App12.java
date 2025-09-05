@@ -3,7 +3,7 @@ package roadmap.challenge12;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public final class App {
+public final class App12 {
 
     private static final Scanner SCN = new Scanner(System.in);
 

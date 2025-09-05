@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public final class App {
+public final class App3 {
 
     private static final Scanner SCN = new Scanner(System.in);
     private static final SecureRandom RND = new SecureRandom();

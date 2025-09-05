@@ -1,15 +1,15 @@
 package roadmap.challenge02;
 
-public final class App {
-
-    private enum Player {P1, P2}
-
-    private static final String[] EARLY_SCORES = {"Love", "15", "30", "40"};
+public final class App2 {
 
     private static final String HEADER = """
             
             PARTIDO DE TENIS
             ================""";
+
+    private enum Player {P1, P2}
+
+    private static final String[] EARLY_SCORES = {"Love", "15", "30", "40"};
 
     public static void main(String[] args) {
         Player[] sequence = {Player.P2, Player.P2, Player.P1, Player.P1, Player.P2, Player.P1, null, Player.P2, Player.P2};

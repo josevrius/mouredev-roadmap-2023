@@ -3,7 +3,7 @@ package roadmap.challenge06;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public final class App {
+public final class App6 {
 
     private static final Scanner SCN = new Scanner(System.in);
     private static final Random RND = new Random();

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public final class App {
+public final class App19 {
 
     private static final Scanner SCN = new Scanner(System.in);
 
@@ -22,7 +22,7 @@ public final class App {
             List<int[]> twinsList = getPrimeTwins(range);
             showTwins(twinsList);
         } catch (Exception e) {
-            System.out.println("Error ..: " + e.getMessage());
+            System.err.println("Error ..: " + e.getMessage());
         }
     }
 

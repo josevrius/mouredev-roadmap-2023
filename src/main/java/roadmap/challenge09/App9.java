@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public final class App {
+public final class App9 {
 
     private static final Scanner SCN = new Scanner(System.in);
     private static final HttpClient CLIENT = HttpClient.newHttpClient();

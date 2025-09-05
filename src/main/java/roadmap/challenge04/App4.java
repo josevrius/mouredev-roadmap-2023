@@ -3,7 +3,7 @@ package roadmap.challenge04;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public final class App {
+public final class App4 {
 
     private static final Scanner SCN = new Scanner(System.in);
 
