@@ -36,11 +36,7 @@ public final class App28 {
         String[] tokens = sequence.split("-");
 
         for (String token : tokens) {
-            if (T9_CODE.containsKey(token)) {
-                decodedText.append(T9_CODE.get(token));
-            } else {
-                decodedText.append('?');
-            }
+            decodedText.append(T9_CODE.getOrDefault(token, '?'));
         }
         return decodedText.toString();
     }
