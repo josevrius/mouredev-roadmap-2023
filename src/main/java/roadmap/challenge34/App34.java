@@ -39,7 +39,7 @@ public final class App34 {
         if (hex.startsWith("#")) {
             hex = hex.substring(1);
         }
-        if (hex.length() != 6) {
+        if (!hex.matches("[\\dA-Fa-f]{6}")) {
             throw new IllegalArgumentException("Formato hexadecimal incorrecto");
         }
 
